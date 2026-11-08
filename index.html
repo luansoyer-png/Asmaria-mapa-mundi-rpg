@@ -1,0 +1,254 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Mapa interativo do mundo de Asmaria. Explore cidades, regiões e histórias.">
+
+    <title>Asmaria | Mapa Interativo</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- CABEÇALHO -->
+    <header class="cabecalho">
+
+        <p class="sobretitulo">ATLAS DO MUNDO</p>
+
+        <h1>Asmaria</h1>
+
+        <p class="introducao">
+            Explore o mapa e selecione uma cidade para descobrir seus segredos.
+        </p>
+
+    </header>
+
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="pagina">
+
+        <!-- MAPA -->
+        <section class="painel-mapa" aria-label="Mapa interativo de Asmaria">
+
+            <div class="barra-mapa">
+
+                <span>MAPA-MÚNDI</span>
+
+                <span class="instrucao">Selecione um marcador</span>
+
+            </div>
+
+            <div class="mapa" id="mapa">
+
+                <img
+                    class="imagem-mapa"
+                    src="assets/mapa.png"
+                    alt="Mapa ilustrado do mundo de Asmaria"
+                >
+
+                <div class="marcadores" id="marcadores"></div>
+
+            </div>
+
+            <p class="nota-mapa">
+                Os marcadores representam as localidades destacadas no mapa.
+            </p>
+
+        </section>
+
+
+        <!-- LISTA DE CIDADES -->
+        <aside class="legenda">
+
+            <h2>Localidades conhecidas</h2>
+
+            <p>
+                Escolha uma cidade na lista ou diretamente no mapa.
+            </p>
+
+            <div id="lista-cidades" class="lista-cidades"></div>
+
+        </aside>
+
+    </main>
+
+
+    <!-- JANELA DE INFORMAÇÕES DAS CIDADES -->
+    <dialog
+        class="janela-cidade"
+        id="janela-cidade"
+        aria-labelledby="cidade-titulo"
+    >
+
+        <button
+            class="fechar"
+            id="fechar-modal"
+            type="button"
+            aria-label="Fechar"
+        >
+            &times;
+        </button>
+
+        <img
+            id="cidade-imagem"
+            class="imagem-cidade"
+            src=""
+            alt=""
+        >
+
+        <div class="detalhes-cidade">
+
+            <p class="sobretitulo">LOCALIDADE DE ASMARIA</p>
+
+            <h2 id="cidade-titulo"></h2>
+
+            <p id="cidade-descricao"></p>
+
+
+            <!-- NAVEGAÇÃO DAS ABAS -->
+            <nav class="navegacao-cidade" aria-label="Informações da cidade">
+
+                <button
+                    type="button"
+                    class="botao-aba ativo"
+                    data-aba="informacoes"
+                >
+                    Informações
+                </button>
+
+                <button
+                    type="button"
+                    class="botao-aba"
+                    data-aba="npcs"
+                >
+                    NPCs
+                </button>
+
+                <button
+                    type="button"
+                    class="botao-aba"
+                    data-aba="guilda"
+                >
+                    Guilda
+                </button>
+
+            </nav>
+
+
+            <!-- ABA INFORMAÇÕES -->
+            <section
+                id="aba-informacoes"
+                class="conteudo-aba"
+            >
+
+                <h3>Sobre a cidade</h3>
+
+                <p id="resumo-cidade"></p>
+
+                <p class="dica-imagem">
+                    Para personalizar, substitua a imagem desta cidade na pasta
+                    <strong>assets/cidades</strong>.
+                </p>
+
+            </section>
+
+
+            <!-- ABA NPCs -->
+            <section
+                id="aba-npcs"
+                class="conteudo-aba"
+                hidden
+            >
+
+                <h3>Personagens conhecidos</h3>
+
+                <div id="lista-npcs"></div>
+
+            </section>
+
+
+            <!-- ABA GUILDA -->
+            <section
+                id="aba-guilda"
+                class="conteudo-aba"
+                hidden
+            >
+
+                <h3>Quadro de missões</h3>
+
+                <div id="lista-missoes"></div>
+
+            </section>
+
+        </div>
+
+    </dialog>
+
+
+    <!-- LIVRO DE VISITANTES -->
+    <section class="livro-visitantes" id="livro-visitantes">
+
+        <div class="cabecalho-livro">
+
+            <p class="sobretitulo">REGISTROS DOS VIAJANTES</p>
+
+            <h2>Livro de Visitantes de Asmaria</h2>
+
+            <p>
+                Deixe seu registro neste mundo.
+                Compartilhe suas histórias com os próximos aventureiros!
+            </p>
+
+        </div>
+
+
+        <!-- FORMULÁRIO -->
+        <form id="form-mensagem">
+
+            <input
+                type="text"
+                id="nome-visitante"
+                placeholder="Seu nome ou apelido"
+                maxlength="60"
+                required
+            >
+
+            <textarea
+                id="texto-mensagem"
+                placeholder="Escreva sua mensagem..."
+                maxlength="1000"
+                required
+            ></textarea>
+
+            <button type="submit">
+                Publicar mensagem
+            </button>
+
+        </form>
+
+
+        <!-- MENSAGENS -->
+        <div id="lista-mensagens" class="lista-mensagens"></div>
+
+    </section>
+
+
+    <!-- RODAPÉ -->
+    <footer>
+
+        <p>Asmaria — Atlas interativo</p>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="script.js?v=7"></script>
+
+</body>
+
+</html>

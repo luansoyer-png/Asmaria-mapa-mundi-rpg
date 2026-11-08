@@ -1,0 +1,688 @@
+
+/* =========================================
+   VARIÁVEIS GLOBAIS
+========================================= */
+
+:root {
+    color-scheme: dark;
+
+    --fundo: #081820;
+    --painel: #102b35;
+    --dourado: #d8b978;
+    --texto: #f2ead8;
+    --texto-suave: #b8c8c5;
+    --azul: #4fa5ad;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   CONFIGURAÇÕES GERAIS
+========================================= */
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    background: radial-gradient(
+        ellipse at top,
+        #173b45 0%,
+        var(--fundo) 58%
+    );
+
+    color: var(--texto);
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+
+/* =========================================
+   CABEÇALHO
+========================================= */
+
+.cabecalho {
+    text-align: center;
+    padding: 38px 18px 25px;
+}
+
+.sobretitulo {
+    margin: 0 0 7px;
+    color: var(--dourado);
+
+    font: 700 .72rem/1.4 Arial, sans-serif;
+    letter-spacing: .22em;
+}
+
+h1 {
+    margin: 0;
+    color: #f4dfad;
+
+    font-size: clamp(2.6rem, 7vw, 4.8rem);
+    font-weight: 500;
+    letter-spacing: .08em;
+
+    text-shadow: 0 3px 18px #0009;
+}
+
+.introducao {
+    margin: 10px 0 0;
+    color: var(--texto-suave);
+    font-size: 1.05rem;
+}
+
+
+/* =========================================
+   LAYOUT PRINCIPAL
+========================================= */
+
+.pagina {
+    width: min(1320px, calc(100% - 32px));
+    margin: 0 auto 40px;
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 280px;
+
+    gap: 22px;
+    align-items: start;
+}
+
+
+/* =========================================
+   PAINÉIS
+========================================= */
+
+.painel-mapa,
+.legenda {
+    background: linear-gradient(
+        145deg,
+        #14343e,
+        #0c222b
+    );
+
+    border: 1px solid #b99b5b66;
+    box-shadow: 0 18px 50px #0005;
+}
+
+.painel-mapa {
+    padding: 12px;
+}
+
+
+/* =========================================
+   BARRA DO MAPA
+========================================= */
+
+.barra-mapa {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+
+    padding: 5px 5px 12px;
+
+    color: var(--dourado);
+
+    font: 700 .7rem Arial, sans-serif;
+    letter-spacing: .13em;
+}
+
+.instrucao {
+    color: var(--texto-suave);
+    font-weight: 400;
+    letter-spacing: 0;
+}
+
+
+/* =========================================
+   MAPA
+========================================= */
+
+.mapa {
+    position: relative;
+    width: 100%;
+
+    overflow: hidden;
+    background: #092d3a;
+
+    line-height: 0;
+}
+
+.imagem-mapa {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.marcadores {
+    position: absolute;
+    inset: 0;
+}
+
+
+/* =========================================
+   MARCADORES DAS CIDADES
+========================================= */
+
+.marcador {
+    position: absolute;
+
+    width: clamp(34px, 5.2vw, 62px);
+    aspect-ratio: 1;
+
+    padding: 3px;
+
+    border: 2px solid #e6c98b;
+    border-radius: 50%;
+
+    background: #102832;
+
+    box-shadow:
+        0 2px 12px #000c,
+        0 0 0 2px #152e38aa;
+
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+
+    transition:
+        transform .18s ease,
+        box-shadow .18s ease,
+        border-color .18s ease;
+
+    z-index: 2;
+}
+
+.marcador:hover,
+.marcador:focus-visible {
+    z-index: 5;
+
+    transform: translate(-50%, -50%) scale(1.22);
+
+    border-color: #fff1c8;
+
+    box-shadow:
+        0 0 0 4px #e6c98b55,
+        0 5px 20px #000d;
+
+    outline: none;
+}
+
+.marcador img {
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.marcador::after {
+    content: attr(data-nome);
+
+    position: absolute;
+    left: 50%;
+    top: calc(100% + 7px);
+
+    transform: translateX(-50%);
+
+    padding: 5px 8px;
+
+    border: 1px solid #d8b97899;
+    border-radius: 4px;
+
+    background: #081820ed;
+    color: #fff0c8;
+
+    font: 600 11px Arial, sans-serif;
+    white-space: nowrap;
+
+    opacity: 0;
+    pointer-events: none;
+
+    transition: opacity .15s ease;
+    line-height: 1.2;
+}
+
+.marcador:hover::after,
+.marcador:focus-visible::after {
+    opacity: 1;
+}
+
+
+/* =========================================
+   NOTA DO MAPA
+========================================= */
+
+.nota-mapa {
+    margin: 10px 4px 1px;
+
+    color: var(--texto-suave);
+    font: .78rem Arial, sans-serif;
+}
+
+
+/* =========================================
+   LEGENDA E LISTA DE CIDADES
+========================================= */
+
+.legenda {
+    padding: 20px;
+}
+
+.legenda h2 {
+    margin: 0 0 8px;
+
+    color: #f0d79f;
+    font-size: 1.35rem;
+    font-weight: 500;
+}
+
+.legenda > p {
+    margin: 0 0 17px;
+
+    color: var(--texto-suave);
+    font: .86rem/1.5 Arial, sans-serif;
+}
+
+.lista-cidades {
+    display: grid;
+    gap: 8px;
+}
+
+.item-cidade {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    width: 100%;
+    padding: 8px;
+
+    border: 1px solid #b99b5b33;
+    border-radius: 5px;
+
+    background: #071b24aa;
+    color: var(--texto);
+
+    text-align: left;
+    cursor: pointer;
+
+    font: .9rem Arial, sans-serif;
+}
+
+.item-cidade:hover,
+.item-cidade:focus-visible {
+    border-color: var(--dourado);
+    background: #1b3c45;
+    outline: none;
+}
+
+.item-cidade img {
+    width: 36px;
+    height: 36px;
+
+    border-radius: 50%;
+    object-fit: cover;
+
+    border: 1px solid var(--dourado);
+}
+
+
+/* =========================================
+   JANELA DAS CIDADES
+========================================= */
+
+.janela-cidade {
+    position: relative;
+
+    width: min(540px, calc(100% - 28px));
+    padding: 0;
+
+    border: 1px solid var(--dourado);
+    border-radius: 10px;
+
+    background: #102b35;
+    color: var(--texto);
+
+    box-shadow: 0 24px 80px #000c;
+}
+
+.janela-cidade::backdrop {
+    background: #02090dcc;
+    backdrop-filter: blur(4px);
+}
+
+.fechar {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+
+    width: 38px;
+    height: 38px;
+
+    border: 1px solid #fff8;
+    border-radius: 50%;
+
+    background: #06151ddd;
+    color: white;
+
+    font-size: 1.7rem;
+    cursor: pointer;
+}
+
+.imagem-cidade {
+    display: block;
+    width: 100%;
+    height: 230px;
+
+    object-fit: cover;
+    background: #183e48;
+}
+
+.detalhes-cidade {
+    padding: 23px 25px 25px;
+}
+
+.detalhes-cidade h2 {
+    margin: 0 0 12px;
+
+    color: #f0d79f;
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.detalhes-cidade > p:not(.sobretitulo) {
+    color: var(--texto-suave);
+    font: 1rem/1.6 Arial, sans-serif;
+}
+
+.detalhes-cidade .dica-imagem {
+    margin-top: 20px;
+    padding-top: 12px;
+
+    border-top: 1px solid #ffffff22;
+
+    font-size: .78rem !important;
+}
+
+
+/* =========================================
+   LIVRO DE VISITANTES
+========================================= */
+
+.livro-visitantes {
+    width: min(900px, calc(100% - 32px));
+
+    margin: 50px auto;
+    padding: 30px;
+
+    background: linear-gradient(
+        145deg,
+        #14343e,
+        #0c222b
+    );
+
+    border: 1px solid #b99b5b88;
+
+    box-shadow: 0 18px 50px #0005;
+}
+
+.cabecalho-livro {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.cabecalho-livro h2 {
+    margin: 10px 0;
+
+    color: #f0d79f;
+    font-size: clamp(1.6rem, 4vw, 2.3rem);
+    font-weight: 500;
+}
+
+.cabecalho-livro > p:last-child {
+    color: var(--texto-suave);
+    font: .95rem/1.6 Arial, sans-serif;
+}
+
+
+/* =========================================
+   FORMULÁRIO DE MENSAGENS
+========================================= */
+
+#form-mensagem {
+    display: grid;
+    gap: 14px;
+}
+
+#nome-visitante,
+#texto-mensagem {
+    width: 100%;
+    padding: 14px;
+
+    border: 1px solid #b99b5b66;
+    border-radius: 5px;
+
+    background: #071b24;
+    color: var(--texto);
+
+    font: .95rem Arial, sans-serif;
+
+    outline: none;
+    transition: border-color .2s ease;
+}
+
+#nome-visitante:focus,
+#texto-mensagem:focus {
+    border-color: var(--dourado);
+}
+
+#nome-visitante::placeholder,
+#texto-mensagem::placeholder {
+    color: #8fa9a8;
+}
+
+#texto-mensagem {
+    min-height: 130px;
+    resize: vertical;
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   BOTÃO DE PUBLICAR
+========================================= */
+
+#form-mensagem button {
+    justify-self: start;
+
+    padding: 13px 22px;
+
+    border: 1px solid #f0d79f;
+    border-radius: 5px;
+
+    background: linear-gradient(
+        135deg,
+        #b99b5b,
+        #d8b978
+    );
+
+    color: #10232a;
+
+    font: 700 .9rem Arial, sans-serif;
+
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+#form-mensagem button:hover {
+    background: #f0d79f;
+    transform: translateY(-2px);
+}
+
+
+/* =========================================
+   LISTA DE MENSAGENS
+========================================= */
+
+.lista-mensagens {
+    display: grid;
+    gap: 15px;
+
+    margin-top: 30px;
+}
+
+.mensagem-visitante {
+    padding: 18px;
+
+    border: 1px solid #b99b5b55;
+    border-left: 3px solid var(--dourado);
+
+    border-radius: 5px;
+
+    background: #071b24aa;
+
+    overflow-wrap: anywhere;
+}
+
+.mensagem-visitante h3 {
+    margin: 0 0 10px;
+
+    color: #f0d79f;
+    font-size: 1.15rem;
+    font-weight: 500;
+}
+
+.mensagem-visitante p {
+    margin: 0 0 15px;
+
+    color: var(--texto-suave);
+
+    font: .95rem/1.6 Arial, sans-serif;
+
+    white-space: pre-wrap;
+}
+
+
+/* =========================================
+   BOTÕES EDITAR E APAGAR
+========================================= */
+
+.mensagem-visitante button {
+    margin-right: 8px;
+    padding: 8px 13px;
+
+    border: 1px solid var(--dourado);
+    border-radius: 4px;
+
+    background: transparent;
+    color: var(--dourado);
+
+    font: .8rem Arial, sans-serif;
+
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.mensagem-visitante button:hover {
+    background: var(--dourado);
+    color: #10232a;
+}
+
+.mensagem-visitante button:last-child {
+    border-color: #b96b62;
+    color: #e69b91;
+}
+
+.mensagem-visitante button:last-child:hover {
+    background: #b96b62;
+    color: white;
+}
+
+
+/* =========================================
+   RODAPÉ
+========================================= */
+
+footer {
+    padding: 22px;
+
+    color: #8fa9a8;
+    text-align: center;
+
+    font: .8rem Arial, sans-serif;
+}
+
+
+/* =========================================
+   RESPONSIVIDADE - TABLETS
+========================================= */
+
+@media (max-width: 900px) {
+
+    .pagina {
+        grid-template-columns: 1fr;
+    }
+
+    .legenda {
+        order: 2;
+    }
+
+    .lista-cidades {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+/* =========================================
+   RESPONSIVIDADE - CELULARES
+========================================= */
+
+@media (max-width: 520px) {
+
+    .pagina {
+        width: min(100% - 16px, 1320px);
+        gap: 12px;
+    }
+
+    .painel-mapa {
+        padding: 6px;
+    }
+
+    .barra-mapa {
+        font-size: .6rem;
+    }
+
+    .marcador {
+        width: clamp(25px, 7vw, 36px);
+        padding: 2px;
+        border-width: 1px;
+    }
+
+    .marcador::after {
+        display: none;
+    }
+
+    .lista-cidades {
+        grid-template-columns: 1fr;
+    }
+
+    .imagem-cidade {
+        height: 180px;
+    }
+
+    .livro-visitantes {
+        width: calc(100% - 16px);
+        padding: 20px 15px;
+        margin: 30px auto;
+    }
+
+    #form-mensagem button {
+        width: 100%;
+    }
+
+    .mensagem-visitante button {
+        margin-bottom: 5px;
+    }
+
+}

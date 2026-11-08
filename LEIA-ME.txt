@@ -1,0 +1,27 @@
+ASMARIA — MAPA INTERATIVO
+
+ARQUIVOS
+- index.html: estrutura da página.
+- style.css: aparência e responsividade.
+- script.js: cidades, posições e interações.
+- assets/mapa.png: mapa original recortado para remover as margens brancas.
+- assets/cidades/: miniaturas extraídas dos círculos que já aparecem no mapa.
+
+COMO ABRIR
+Abra index.html no navegador. Para desenvolver, use a extensão Live Server do VS Code.
+
+COMO EDITAR AS CIDADES
+Abra script.js. Cada objeto dentro da lista "cidades" possui:
+- nome: nome mostrado no marcador e na janela.
+- x e y: posição percentual no mapa (0 a 100).
+- imagem: caminho da imagem da cidade.
+- descricao: texto mostrado ao clicar.
+
+ATENÇÃO AOS NOMES
+O mapa original tem alguns nomes pequenos e pouco legíveis. "Cidade do Sul (editar nome)" e "Ehat (confirmar grafia)" são marcações provisórias. Confirme e altere esses nomes no script.js.
+
+COMO TROCAR AS IMAGENS
+Substitua os arquivos JPG dentro de assets/cidades mantendo os mesmos nomes, ou altere o caminho "imagem" no script.js. As miniaturas atuais foram recortadas dos retratos circulares que já aparecem na imagem original; são imagens provisórias.
+
+PHP E MYSQL
+A versão atual é Front-End (HTML, CSS e JavaScript). PHP e MySQL não são necessários para o mapa funcionar. Eles podem ser adicionados depois caso queira cadastrar e editar cidades através de um painel administrativo e salvar os dados no banco.
